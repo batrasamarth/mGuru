@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity" >
+    
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Attendance Tab"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+         <Button
+            android:id="@+id/SyncButton"
+            android:layout_width="41dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="#ffd700"
+            android:onClick="syncAttendance"
+            android:text="S"
+            android:textColor="#cc0000"
+            android:textSize="30sp" />
+        <LinearLayout 
+            android:id="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            >
+            <Button 
+            android:id="@+id/submitButton"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Submit"
+            android:onClick="submitAttendance"
+            android:background="@drawable/submit_button_selector"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            />
+            
+            <Button 
+            android:id="@+id/declareHolidayButton"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Declare Holiday"
+            android:onClick="declareHoliday"
+            
+            android:background="@drawable/submit_button_selector"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            />
+        </LinearLayout>
+         <LinearLayout 
+            android:id="@+id/linearLayout3"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="#FFFFFF"
+            android:layout_below="@+id/linearLayout2"
+            >
+            <TextView 
+                android:id="@+id/toggleLabel"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:text="Morning/Afternoon Attendance"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <ToggleButton 
+                android:id="@+id/morningAttendanceToggle"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:textOn="Afternoon"
+                android:textOff="Morning"
+                android:onClick="onToggleClick"
+                />
+          </LinearLayout>
+     </RelativeLayout>
+     <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+    <ListView
+         android:id="@android:id/list"
+         android:layout_width="match_parent"
+         android:layout_height="fill_parent"
+         android:layout_alignParentLeft="true">
+     </ListView>
+     </RelativeLayout>
+	
+</RelativeLayout>
+
+
+

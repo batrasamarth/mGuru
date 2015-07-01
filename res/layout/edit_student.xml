@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCCCCC"
+    android:orientation="vertical"
+    android:paddingTop="1dp" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cc0000"
+        android:padding="5dp"
+        android:text="@string/adduser"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+       <RelativeLayout
+     android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/user" />
+
+    <EditText
+        android:id="@+id/rollNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:inputType="number"
+        android:ems="15" android:hint="@string/hintRollNumber">
+
+        <requestFocus />
+    </EditText>
+    <TextView
+     android:id="@+id/textView3"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignLeft="@+id/rollNumber"
+     android:layout_below="@+id/rollNumber"
+     android:paddingTop="10dp"
+     android:text="@string/firstNameView" />
+	<EditText
+        android:id="@+id/firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:ems="15" >
+
+        <requestFocus />
+    </EditText>   
+   <TextView
+     android:id="@+id/textView4"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignLeft="@+id/rollNumber"
+     android:layout_below="@+id/firstName"
+     android:paddingTop="10dp"
+     android:text="@string/lastNameView" />
+	<EditText
+        android:id="@+id/lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView4"
+        android:ems="15" >
+
+        <requestFocus />
+    </EditText> 
+    <RadioGroup 
+        android:id="@+id/genderBox"
+        android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:layout_alignLeft="@+id/rollNumber"
+     	android:layout_below="@+id/lastName"
+     	android:orientation="horizontal"
+     	android:paddingTop="10dp">
+        <RadioButton 
+            android:id="@+id/maleBox"
+            android:text="Male"/>
+        <RadioButton 
+            android:id="@+id/femaleBox"
+            android:text="Female"/>
+    </RadioGroup>  
+   	<Button android:id="@+id/dateBirthButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/buttonDate"
+	    android:paddingTop="10dp"
+	    android:layout_alignStart="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/genderBox"
+        android:onClick="showDatePickerDialog" />
+   	<TextView 
+   	    android:id="@+id/dateDisplayText"
+   	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toRightOf="@+id/dateBirthButton"
+	    android:layout_below="@+id/genderBox"
+	    android:paddingLeft="10dp"
+	    
+   	    />
+    <TextView
+     android:id="@+id/textView5"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignLeft="@+id/rollNumber"
+     android:layout_below="@+id/dateBirthButton"
+     android:paddingTop="10dp"
+     android:text="@string/admissionNumberView" />
+	
+	
+	<EditText
+        android:id="@+id/admissionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView5"
+        android:ems="15" >
+
+        <requestFocus />
+    </EditText> 
+    
+    <Button
+        android:id="@+id/btnadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userName"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="32dp"
+        android:paddingTop="30dp"
+        android:text="@string/save"      
+    	android:onClick="addNewUser" />
+ <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_toRightOf="@+id/btnadd"
+        android:layout_marginTop="32dp"
+        android:paddingTop="30dp"
+        android:text="@string/cancel"      
+    	android:onClick="cancelAddUser" />
+
+ 
+
+</RelativeLayout>
+        
+
+</LinearLayout>

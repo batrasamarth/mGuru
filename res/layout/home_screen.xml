@@ -1,0 +1,68 @@
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@android:color/white"
+>
+<FrameLayout 
+	    android:id="@+id/fragment_container"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_above="@+id/navBar"
+	    >
+    <fragment android:name="com.eduattendanceapp.StudentsFragment"
+              android:id="@+id/StudentsFragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+    <fragment android:name="com.eduattendanceapp.HomeFragment"
+              android:id="@+id/HomeFragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+    <fragment android:name="com.eduattendanceapp.AttendanceFragment"
+              android:id="@+id/AttendanceFragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+    <fragment android:name="com.eduattendanceapp.QueryFragment"
+              android:id="@+id/QueryFragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+    
+	
+	</FrameLayout>
+
+    <RadioGroup
+    android:id="@+id/navBar"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:background="@drawable/navbar_background"
+  >
+   <RadioButton
+      android:id="@+id/btnHome"
+      style="@style/navbar_button"
+      android:drawableTop="@drawable/navbar_home_selector"
+      android:text="Home"
+    />
+    <RadioButton
+      android:id="@+id/btnStudents"
+      style="@style/navbar_button"
+      android:drawableTop="@drawable/navbar_students_selector"
+      android:text="Students"
+    />
+    <RadioButton
+      android:id="@+id/btnAttendance"
+      style="@style/navbar_button"
+      android:drawableTop="@drawable/navbar_attendance_selector"
+      android:text="Attendance"
+      android:layout_marginLeft="5dp"
+    />
+    <RadioButton
+      android:id="@+id/btnQuery"
+      style="@style/navbar_button"
+      android:drawableTop="@drawable/navbar_query_selector"
+      android:text="Query"
+      android:layout_marginLeft="5dp"
+    />
+    </RadioGroup>
+</RelativeLayout>

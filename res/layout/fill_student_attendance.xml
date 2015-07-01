@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+   	android:padding="10dp"
+     >
+     
+    	<TextView
+        android:id="@+id/rollNo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10dp"
+        />
+ 
+       <TextView
+        android:id="@+id/studentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+      	android:layout_toRightOf="@+id/rollNo"
+      	android:paddingLeft="30dp"
+      	android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold" 
+        />
+       <RadioGroup
+           android:id="@+id/attendanceBox"
+           android:layout_width="120dp"
+           android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+           android:layout_alignParentRight="true"
+       
+            android:background="@drawable/attendance_background"
+          
+           android:layout_toLeftOf="@+id/studentName"
+           android:orientation="horizontal"
+           >
+           <RadioButton 
+           android:id="@+id/absentButton"
+           
+           style="@style/attendance_button_absent"
+           android:checked="false"
+           android:text="Absent"
+              />
+       	<RadioButton 
+               android:id="@+id/presentButton"
+               style="@style/attendance_button"
+    		   android:text="Present"
+    		   android:checked="false"
+        />
+       </RadioGroup>
+       
+	
+</RelativeLayout>

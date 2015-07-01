@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+   >
+   <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Query Tab"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+   
+  
+             <TextView
+            android:id="@+id/dateDisplayText"
+            android:padding = "5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+          	android:layout_below="@+id/textView1"
+            android:text="Display Attendance by date:"
+            android:gravity="center"
+            android:background="#000000"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            />
+             <LinearLayout 
+                 android:id="@+id/linearLayout1"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="5dp"
+                 android:orientation="horizontal"
+                 android:layout_below="@+id/dateDisplayText"
+                 >
+             <Button 
+                 android:id="@+id/selectDate"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:text="Set Date"
+                 android:background="@drawable/submit_button_selector"
+                 android:textAppearance="?android:attr/textAppearanceLarge"
+            	 android:onClick="selectDateForAttendance"
+                 android:textColor="#FFFFFF"
+                 android:gravity="center"/>
+             <ToggleButton 
+                 android:id="@+id/attendanceTypeToggle"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:textOn="Noon"
+                 android:textOff="Morning"
+                 android:background="@drawable/submit_button_selector"
+                 android:textAppearance="?android:attr/textAppearanceLarge"
+            	 android:onClick="selectTypeForAttendance"
+                 android:textColor="#FFFFFF"
+                 
+                 /> 
+             </LinearLayout>
+             
+             <Button 
+                 android:id="@+id/displayAttendance"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="5dp"
+                 android:text="Display"
+                 android:layout_below="@+id/linearLayout1"
+                 android:background="@drawable/submit_button_selector"
+                 android:textAppearance="?android:attr/textAppearanceLarge"
+            	android:onClick="displayAttendance"
+                 android:textColor="#FFFFFF"
+                 android:gravity="center"/>
+          <ListView
+         android:id="@android:id/list"
+         android:layout_width="fill_parent"
+         android:layout_height="match_parent"
+         
+         android:layout_below="@+id/displayAttendance"
+         android:background="#FFFFFF"
+         android:layout_alignParentLeft="true">
+     </ListView>
+
+    
+</RelativeLayout>

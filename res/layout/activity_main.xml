@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+   
+		<LinearLayout
+		    android:id="@+id/linLayout1"
+		    android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+        	android:layout_weight="1"
+        	android:layout_marginTop="30dp"
+        	android:layout_centerHorizontal="true" >
+				<TextView
+	        	android:id="@+id/schoolLabel"
+	        	android:layout_marginStart="10dp"
+	        	android:layout_marginLeft="10dp"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		     	android:layout_weight="1"
+		     	android:text="@string/schoolID"
+		     	
+		     	/>
+				<EditText
+		        android:id="@+id/schoolInput"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="33dp"
+		        android:layout_weight="3"
+		       	/> 
+		       
+
+    	
+			    
+		</LinearLayout>
+        <LinearLayout
+            android:id="@+id/linLayout2"
+		    android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+        	android:layout_weight="1" 
+        	android:layout_marginTop="30dp"
+        	android:layout_below="@+id/linLayout1"
+        	>
+     		<TextView
+	        android:id="@+id/classLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginStart="10dp"
+	       	android:layout_marginLeft="10dp"
+		    android:text="@string/classID"
+	        android:layout_weight="1"
+	     	/>
+	    	<EditText
+	        android:id="@+id/classInput"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"       
+	        android:layout_weight="3" />
+	
+	    </LinearLayout>
+   
+		 <LinearLayout
+		    android:id="@+id/linLayout3"
+		    android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal" 
+        	android:layout_below="@+id/linLayout2"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginTop="30dp"
+        	android:layout_weight="1">
+	        <TextView
+	        android:id="@+id/networkInfo"
+	        android:layout_width="fill_parent"
+	        android:gravity="center"
+	        android:layout_height="wrap_content"
+	       
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	      </LinearLayout>
+
+  
+    <Button
+        android:id="@+id/login"
+        android:layout_below="@+id/linLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/loginButton"
+        android:onClick="connectToAppEngine" />
+
+</RelativeLayout>
