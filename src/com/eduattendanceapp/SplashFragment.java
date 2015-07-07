@@ -20,7 +20,6 @@ public class SplashFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View view = inflater.inflate(R.layout.splash, container, false);
 	
-	    registerButton = (Button) view.findViewById(R.id.login_button);
 	    
 	    
 	    return view;

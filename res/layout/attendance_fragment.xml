@@ -21,17 +21,16 @@
             android:text="Attendance Tab"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
-         <Button
-            android:id="@+id/SyncButton"
-            android:layout_width="41dp"
+         <TextView
+            android:id="@+id/SyncStatus"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="#ffd700"
-            android:onClick="syncAttendance"
-            android:text="S"
-            android:textColor="#cc0000"
-            android:textSize="30sp" />
+            android:gravity="center"
+            android:text="Synced"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
         <LinearLayout 
             android:id="@+id/linearLayout2"
             android:orientation="horizontal"
@@ -42,7 +41,8 @@
             <Button 
             android:id="@+id/submitButton"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="60dp"
+            android:gravity="center"
             android:layout_weight="1"
             android:text="Submit"
             android:onClick="submitAttendance"
@@ -54,43 +54,33 @@
             <Button 
             android:id="@+id/declareHolidayButton"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:text="Declare Holiday"
             android:onClick="declareHoliday"
             
             android:background="@drawable/submit_button_selector"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            />
+            />  
         </LinearLayout>
-         <LinearLayout 
-            android:id="@+id/linearLayout3"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="#FFFFFF"
-            android:layout_below="@+id/linearLayout2"
-            >
-            <TextView 
-                android:id="@+id/toggleLabel"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:text="Morning/Afternoon Attendance"
-                android:gravity="center"
-                android:layout_weight="1"/>
-            <ToggleButton 
-                android:id="@+id/morningAttendanceToggle"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:textOn="Afternoon"
-                android:textOff="Morning"
-                android:onClick="onToggleClick"
-                />
-          </LinearLayout>
+        <!-- 
+      <Button
+          android:id="@+id/allPresent"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="All present"
+          android:layout_below="@+id/linearLayout2"
+          android:background="@drawable/submit_button_selector"
+          android:gravity="center"
+          android:onClick="markAllPresent"
+          android:textColor="#FFFFFF"
+          />
+         -->
      </RelativeLayout>
+    
+ 
      <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="fill_parent"
@@ -107,7 +97,35 @@
          android:layout_alignParentLeft="true">
      </ListView>
      </RelativeLayout>
-	
+     
+     <RelativeLayout 
+         android:id="@+id/attendanceCoveredLayout"
+         android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+         >
+          <ImageView 
+        android:id="@+id/warningView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/checkmark"
+        android:layout_centerInParent="true"
+        
+        />
+         <TextView 
+             android:id="@+id/warningText"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/warningView"
+             android:gravity="center"
+             android:textSize="20sp"/>
+         
+     </RelativeLayout>
+	  
 </RelativeLayout>
 
 

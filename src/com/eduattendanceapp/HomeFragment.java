@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		
 		View currentView= inflater.inflate(R.layout.home_fragment, container, false);
+		
 		schoolDescription = (TextView)currentView.findViewById(R.id.schoolDesc);
 		classDescription = (TextView)currentView.findViewById(R.id.classDesc);
 		dateTimeView = (TextView)currentView.findViewById(R.id.dateTimeView);

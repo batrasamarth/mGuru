@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--List element layout for attendance fragment  -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -10,12 +12,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:paddingLeft="10dp"
+        android:paddingLeft="5dp"
         />
  
        <TextView
         android:id="@+id/studentName"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
@@ -31,9 +33,7 @@
            android:layout_height="wrap_content"
            android:layout_centerVertical="true"
            android:layout_alignParentRight="true"
-       
             android:background="@drawable/attendance_background"
-          
            android:layout_toLeftOf="@+id/studentName"
            android:orientation="horizontal"
            >

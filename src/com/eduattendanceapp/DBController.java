@@ -26,18 +26,19 @@ public class DBController  extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		String query,query2,query3,query4;
-		query = "CREATE TABLE students ( rollNo INTEGER PRIMARY KEY, " +
-				" firstName TEXT, " +
+		query = "CREATE TABLE students ( studentKey TEXT PRIMARY KEY, " +
+				" givenName TEXT, " +
 				" lastName TEXT, " +
 				" gender TEXT, " +
-				" dateOfBirth TEXT, " +
-				" admissionNumber TEXT, " +
+				" rollNumber INTEGER, " +
+				" grNumber INTEGER, " +
+				" motherName TEXT," +
 				" updateStatus TEXT)";
-		query2 = "CREATE TABLE morningAttendance (rollNo INTEGER," +
+		query2 = "CREATE TABLE morningAttendance (rollNumber INTEGER," +
 				"date TEXT," +
 				"updateStatus TEXT)";
 		
-		query3 = "CREATE TABLE noonAttendance (rollNo INTEGER," +
+		query3 = "CREATE TABLE noonAttendance (rollNumber INTEGER," +
 				"date TEXT," +
 				"updateStatus TEXT)";
 		query4 = "CREATE TABLE holiday(date TEXT," +
@@ -82,7 +83,7 @@ public class DBController  extends SQLiteOpenHelper {
 		SQLiteDatabase database = this.getWritableDatabase();
 		for(int rollNo:presentStudents){
 			ContentValues values = new ContentValues();
-			values.put("rollNo", rollNo);
+			values.put("rollNumber", rollNo);
 			values.put("date", date);
 			values.put("updateStatus", "no");
 			database.insert("morningAttendance", null, values);
@@ -95,7 +96,7 @@ public class DBController  extends SQLiteOpenHelper {
 		SQLiteDatabase database = this.getWritableDatabase();
 		for(int rollNo:presentStudents){
 			ContentValues values = new ContentValues();
-			values.put("rollNo", rollNo);
+			values.put("rollNumber", rollNo);
 			values.put("date", date);
 			values.put("updateStatus", "no");
 			database.insert("noonAttendance", null, values);
@@ -111,12 +112,13 @@ public class DBController  extends SQLiteOpenHelper {
 	public void insertUser(HashMap<String, String> queryValues) {
 		SQLiteDatabase database = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("rollNo", queryValues.get("rollNo"));
-		values.put("firstName", queryValues.get("firstName"));
+		values.put("rollNumber", queryValues.get("rollNumber"));
+		values.put("givenName", queryValues.get("givenName"));
 		values.put("lastName", queryValues.get("lastName"));
 		values.put("gender",queryValues.get("gender"));
-		values.put("dateOfBirth",queryValues.get("dateOfBirth"));
-		values.put("admissionNumber",queryValues.get("admissionNumber"));
+		values.put("studentKey",queryValues.get("studentKey"));
+		values.put("motherName", queryValues.get("motherName"));
+		values.put("grNumber",queryValues.get("grNumber"));
 		values.put("updateStatus", "no");
 		database.insert("students", null, values);
 		Log.d("DB-insert", "Db insert operation");
@@ -158,27 +160,74 @@ public class DBController  extends SQLiteOpenHelper {
 		else return true;
 	}
 	
+	public int getPresentStudentsCountForDate(String date){
+		SQLiteDatabase database = this.getWritableDatabase();
+		String extractQuery = "SELECT COUNT(*)  FROM morningAttendance WHERE date ="+"\'"+date+"\'";
+		int count=0;
+		Cursor cursor = database.rawQuery(extractQuery, null);
+		if(cursor.moveToFirst()){
+			count = cursor.getInt(0);
+		}
+		return count;
+	}
+	
+	public int getAllStudentsForDate(String date){
+		SQLiteDatabase database = this.getWritableDatabase();
+		String extractQuery = "SELECT COUNT(DISTINCT rollNumber) AS TotalNumber FROM students";
+		int count=0;
+		Cursor cursor = database.rawQuery(extractQuery, null);
+		if(cursor.moveToFirst()){
+			count = cursor.getInt(0);
+		}
+		cursor.close();
+		database.close();
+		return count;
+		
+	}
+	
+	public ArrayList<HashMap<String, String>> getAbsentStudentsForDate(String date){
+		ArrayList<HashMap<String,String>> attendanceList = new ArrayList<HashMap<String,String>>();
+		SQLiteDatabase database = this.getWritableDatabase();
+		String extractQuery = "SELECT DISTINCT x.rollNumber, x.givenName, x.lastName FROM students x" +
+				" WHERE NOT EXISTS(SELECT * FROM morningAttendance m WHERE x.rollNumber = m.rollNumber) ORDER BY" +
+				" x.rollNumber ";
+		Cursor cursor = database.rawQuery(extractQuery, null);
+		if (cursor.moveToFirst()){
+			do{
+				Log.d("absent1","rollNumber:" +cursor.getString(0)+"studentName"+cursor.getString(1));
+				HashMap<String, String> entry = new HashMap<String, String>();
+				entry.put("rollNumber", cursor.getString(0));
+				entry.put("studentName", cursor.getString(1)+" "+cursor.getString(2));
+				attendanceList.add(entry);
+			}while(cursor.moveToNext());
+			
+		}
+		cursor.close();
+		database.close();
+		return attendanceList;
+	}
+	
 	public ArrayList<HashMap<String, String>> getAttendanceForDate(String date, boolean ifMorning){
 		ArrayList<HashMap<String, String>> attendanceList = new ArrayList<HashMap<String,String>>();
 		SQLiteDatabase database = this.getWritableDatabase();
 		String extractQuery = "";
 		if(ifMorning){
-			extractQuery = "SELECT DISTINCT x.rollNo, x.firstName, x.lastName FROM students x" +
+			extractQuery = "SELECT DISTINCT x.rollNumber, x.givenName, x.lastName FROM students x" +
 					" INNER JOIN (SELECT * FROM morningAttendance WHERE date ="+"\'"+date+"\') y" +
-							" ON x.rollNo = y.rollNo";
+							" ON x.rollNumber = y.rollNumber";
 			Log.d("extract", extractQuery);
 		}
 		else{
-			extractQuery = "SELECT DISTINCT x.rollNo, x.firstName, x.lastName FROM students x" +
+			extractQuery = "SELECT DISTINCT x.rollNumber, x.givenName, x.lastName FROM students x" +
 					" INNER JOIN (SELECT * FROM noonAttendance WHERE date ="+"\'"+date+"\') y" +
-							" ON x.rollNo = y.rollNo";
+							" ON x.rollNumber = y.rollNumber";
 			Log.d("extract", extractQuery);
 		}
 		Cursor cursor = database.rawQuery(extractQuery, null);
 		if (cursor.moveToFirst()){
 			do{
 				HashMap<String, String> entry = new HashMap<String, String>();
-				entry.put("rollNo", cursor.getString(0));
+				entry.put("rollNumber", cursor.getString(0));
 				entry.put("studentName", cursor.getString(1)+" "+cursor.getString(2));
 				attendanceList.add(entry);
 			}while(cursor.moveToNext());
@@ -197,12 +246,13 @@ public class DBController  extends SQLiteOpenHelper {
 	    
 		ArrayList<HashMap<String, String>> wordList;
 		wordList = new ArrayList<HashMap<String, String>>();
-		String selectQuery = "SELECT  * FROM students ORDER BY rollNo";
+		String selectQuery = "SELECT  * FROM students ORDER BY rollNumber";
 	    Cursor cursor = database.rawQuery(selectQuery, null);
 	    if (cursor.moveToFirst()) {
 	        do {
 	        	HashMap<String, String> map = new HashMap<String, String>();
-	        	map.put("rollNo", cursor.getString(0));
+	        	
+	        	map.put("rollNumber", cursor.getString(4));
 	        	map.put("studentName", cursor.getString(1)+" "+cursor.getString(2));
 	        	
                 wordList.add(map);
@@ -220,7 +270,7 @@ public class DBController  extends SQLiteOpenHelper {
 		if(cursor.moveToFirst()){
 			do{
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("rollNo",cursor.getString(0));
+				map.put("rollNumber",cursor.getString(0));
 				map.put("date", cursor.getString(1));
 				Log.d("composeMorningNonUpdateList",cursor.getString(0)+" "
 	        			+cursor.getString(1));
@@ -238,7 +288,7 @@ public class DBController  extends SQLiteOpenHelper {
 		if(cursor.moveToFirst()){
 			do{
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("rollNo",cursor.getString(0));
+				map.put("rollNumber",cursor.getString(0));
 				map.put("date", cursor.getString(1));
 				Log.d("composeNoonNonUpdateList",cursor.getString(0)+" "
 	        			+cursor.getString(1));
@@ -261,7 +311,7 @@ public class DBController  extends SQLiteOpenHelper {
 	    if (cursor.moveToFirst()) {
 	        do {
 	        	HashMap<String, String> map = new HashMap<String, String>();
-	        	map.put("rollNo", cursor.getString(0));
+	        	map.put("rollNumber", cursor.getString(0));
 	        	map.put("firstName", cursor.getString(1));
 	        	map.put("lastName", cursor.getString(2));
 	        	map.put("gender", cursor.getString(3));
@@ -356,14 +406,14 @@ public class DBController  extends SQLiteOpenHelper {
 	 */
 	public void updateSyncStatus(String id, String status){
 		SQLiteDatabase database = this.getWritableDatabase();	 
-		String updateQuery = "Update students set updateStatus = '"+ status +"' where rollNo="+"'"+ id +"'";
+		String updateQuery = "Update students set updateStatus = '"+ status +"' where rollNumber="+"'"+ id +"'";
 		Log.d("query",updateQuery);		
 		database.execSQL(updateQuery);
 		database.close();
 	}
 	public void updateMorningSyncStatus(String rollNo, String date, String status){
 		SQLiteDatabase database = this.getWritableDatabase();	 
-		String updateQuery = "Update morningAttendance set updateStatus = '"+ status +"' where rollNo="+"'"+ rollNo +"'"
+		String updateQuery = "Update morningAttendance set updateStatus = '"+ status +"' where rollNumber="+"'"+ rollNo +"'"
 				+" and date="+"'"+date+"'";
 		Log.d("query",updateQuery);		
 		database.execSQL(updateQuery);
@@ -371,7 +421,7 @@ public class DBController  extends SQLiteOpenHelper {
 	}
 	public void updateNoonSyncStatus(String rollNo, String date, String status){
 		SQLiteDatabase database = this.getWritableDatabase();	 
-		String updateQuery = "Update noonAttendance set updateStatus = '"+ status +"' where rollNo="+"'"+ rollNo +"'"
+		String updateQuery = "Update noonAttendance set updateStatus = '"+ status +"' where rollNumber="+"'"+ rollNo +"'"
 				+" and date="+"'"+date+"'";
 		Log.d("query",updateQuery);		
 		database.execSQL(updateQuery);

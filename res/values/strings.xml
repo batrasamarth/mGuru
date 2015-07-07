@@ -13,10 +13,10 @@
 	<string name="adduseractivitylabel">"Add User Activity"</string>
 	<string name="welcomeString">"Welcome"</string>
 	<string name ="preference_registration">registrationPreferences</string>
-	<string name ="schoolID">School ID</string>
-	<string name ="classID">Class ID</string>
+	<string name ="userNamePrompt">UserName:</string>
+	<string name ="passwordPrompt">Password:</string>
 	<string name ="loginButton">Login</string>
-	<string name ="homeScreenTitle">teacherAid</string>
+	<string name ="homeScreenTitle">mGuru Attendance</string>
 	<string name="firstNameView">First Name</string>
 	<string name="lastNameView">Last Name</string>
 	<string name="dateBirthView">Date of birth</string>

@@ -7,81 +7,219 @@
     android:layout_height="fill_parent"
     android:background="#000000"
    >
-   <TextView
-            android:id="@+id/textView1"
+  <TextView
+            android:id="@+id/titleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_marginLeft="5dp"
-            android:text="Query Tab"
+            android:text="Select attendance by date"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
    
-  
+   	<LinearLayout 
+   	    android:id="@+id/datePickerContainer"
+   	    android:layout_width="fill_parent"
+   	    android:layout_height="wrap_content"
+   	    android:orientation="horizontal"
+   	    android:layout_centerHorizontal="true"
+   	    android:layout_below="@+id/titleView"
+   	    >
+   	    
+   	    
+   	    <Button 
+   			    android:id="@+id/previousDate"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+   			    android:background="#000000"
+   			    android:text="@string/previousDateButton"
+ 				android:gravity="center"
+   			    android:textColor="#ffffff"
+   			    android:textSize="20sp"
+   			    android:layout_below="@+id/textView1"
+   			    android:onClick="selectPreviousDate"
+            
+   			    
+   			    />
+   	    
+   	  
              <TextView
             android:id="@+id/dateDisplayText"
-            android:padding = "5dp"
-            android:layout_width="fill_parent"
+          
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          	android:layout_below="@+id/textView1"
-            android:text="Display Attendance by date:"
             android:gravity="center"
             android:background="#000000"
             android:textAlignment="center"
+            android:textSize="20sp"
             android:textColor="#FFFFFF"
             />
-             <LinearLayout 
-                 android:id="@+id/linearLayout1"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:padding="5dp"
-                 android:orientation="horizontal"
-                 android:layout_below="@+id/dateDisplayText"
-                 >
-             <Button 
-                 android:id="@+id/selectDate"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:text="Set Date"
-                 android:background="@drawable/submit_button_selector"
-                 android:textAppearance="?android:attr/textAppearanceLarge"
-            	 android:onClick="selectDateForAttendance"
-                 android:textColor="#FFFFFF"
-                 android:gravity="center"/>
-             <ToggleButton 
-                 android:id="@+id/attendanceTypeToggle"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:textOn="Noon"
-                 android:textOff="Morning"
-                 android:background="@drawable/submit_button_selector"
-                 android:textAppearance="?android:attr/textAppearanceLarge"
-            	 android:onClick="selectTypeForAttendance"
-                 android:textColor="#FFFFFF"
-                 
-                 /> 
-             </LinearLayout>
              
              <Button 
-                 android:id="@+id/displayAttendance"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:padding="5dp"
-                 android:text="Display"
-                 android:layout_below="@+id/linearLayout1"
-                 android:background="@drawable/submit_button_selector"
-                 android:textAppearance="?android:attr/textAppearanceLarge"
-            	android:onClick="displayAttendance"
-                 android:textColor="#FFFFFF"
-                 android:gravity="center"/>
-          <ListView
-         android:id="@android:id/list"
+   			    android:id="@+id/nextDate"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+   			    android:background="#000000"
+   			    android:text="@string/nextDateButton"
+ 				android:gravity="center"
+ 				android:textSize="20sp"
+ 				android:onClick="selectNextDate"
+   			    android:textColor="#ffffff"
+   			   
+   			    
+   			    />
+   	    	<ImageView
+   	    	    android:id="@+id/calendarView"
+   	    	    android:layout_width="30dp"
+   	    	    android:layout_height="30dp"
+   	    	    android:background="#000000"
+   	    	    android:src="@drawable/calendar_white"
+   	    	    android:onClick="selectDateForAttendance"
+   	    	    android:layout_gravity="center"
+   	    	  />
+   	</LinearLayout>
+   	<LinearLayout 
+   	    android:id="@+id/summaryLayout"
+   	    android:layout_width="fill_parent"
+   	    android:layout_height="wrap_content"
+   	    android:orientation="vertical"
+   	    android:layout_below="@+id/datePickerContainer"
+   	    >
+   	    <LinearLayout
+   	        android:id="@+id/presentStudents"
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="0dp"
+   	        android:orientation="horizontal"
+   	        android:layout_weight="1"
+   	        android:paddingBottom="5dp"
+   	        >
+   	        <TextView 
+   	            android:id="@+id/presentStudentsLabel"
+   	            android:layout_width="0dp"
+   	            android:layout_height="wrap_content"
+   	            android:layout_weight="1"
+   	            android:text="Students present"
+   	            android:textColor="#ffffff"
+   	            android:gravity="center"
+   	            android:textSize="15sp"
+   	            />
+   	        <TextView 
+   	            android:id="@+id/presentStudentsNumber"
+   	            android:layout_width="0dp"
+   	            android:layout_height="wrap_content"
+   	            android:layout_weight="1"
+   	            android:layout_gravity="center"
+   	            android:textColor="#ffffff"
+   	            android:textSize="15sp"/>
+   	   </LinearLayout>
+   	   <LinearLayout
+   	        android:id="@+id/absentStudents"
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="0dp"
+   	        android:orientation="horizontal"
+   	        android:layout_weight="1"
+   	        android:paddingBottom="5dp"
+   	        >
+   	        <TextView 
+   	            android:id="@+id/absentStudentsLabel"
+   	            android:layout_width="0dp"
+   	            android:layout_height="wrap_content"
+   	            android:layout_weight="1"
+   	            android:text="Students absent"
+   	            android:textColor="#ffffff"
+   	            android:gravity="center"
+   	            android:textSize="15sp"
+   	            />
+   	        <TextView 
+   	            android:id="@+id/absentStudentsNumber"
+   	            android:layout_width="0dp"
+   	            android:layout_height="wrap_content"
+   	            android:layout_weight="1"
+   	            android:layout_gravity="center"
+   	            android:textColor="#ffffff"
+   	            android:textSize="15sp"/>
+   	        
+   	   </LinearLayout>
+   	    <LinearLayout
+   	        android:id="@+id/attendanceListSelector"
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="0dp"
+   	        android:orientation="horizontal"
+   	        android:layout_weight="1"
+   	        android:paddingBottom="5dp"
+   	        >
+   	         <TextView 
+   	            android:id="@+id/listSelector"
+   	            android:layout_width="0dp"
+   	            android:layout_height="wrap_content"
+   	            android:layout_weight="1"
+   	            android:text="Select displayList"
+   	            android:textColor="#ffffff"
+   	            android:gravity="center"
+   	            android:textSize="15sp"
+   	            />
+   	        <RadioGroup
+           android:id="@+id/attendanceTypeSelector"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:layout_centerVertical="true"
+            android:background="@drawable/attendance_background"
+           android:orientation="horizontal"
+           >
+           <RadioButton 
+           android:id="@+id/absentButton"
+           
+           style="@style/attendance_button_absent"
+           android:checked="false"
+           android:text="Absent"
+              />
+       	<RadioButton 
+               android:id="@+id/presentButton"
+               style="@style/attendance_button"
+    		   android:text="Present"
+    		   android:checked="true"
+        />
+       </RadioGroup>
+   	   </LinearLayout>
+   	</LinearLayout>
+   	<RelativeLayout
+   	    android:id="@+id/warningContainer"
+   	    android:layout_width="fill_parent"
+   	    android:layout_height="match_parent"
+   	    android:background="#ffffff"
+   	    android:orientation="vertical"
+   	    android:layout_below="@+id/summaryLayout"
+   	    android:visibility="gone"
+   	 >
+   	    	 
+   	    <ImageView 
+	   android:id="@+id/warningSign"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:src="@drawable/warning"
+	   android:layout_centerInParent="true"
+	   android:padding="30dp"
+	   />
+   	    <TextView 
+   	        android:id="@+id/warningText"
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:gravity="center_horizontal"
+   	        android:layout_below="@+id/warningSign"
+   	        android:layout_centerHorizontal="true"
+   	        android:textSize="20sp"/>
+   	   
+	
+   	</RelativeLayout>
+   	
+       <ListView
+         android:id="@+id/presentList"
          android:layout_width="fill_parent"
          android:layout_height="match_parent"
          
-         android:layout_below="@+id/displayAttendance"
+         android:layout_below="@+id/summaryLayout"
          android:background="#FFFFFF"
          android:layout_alignParentLeft="true">
      </ListView>

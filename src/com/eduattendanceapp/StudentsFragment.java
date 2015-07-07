@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.eduattendanceapp.studentendpoint.Studentendpoint;
-import com.eduattendanceapp.studentendpoint.model.Student;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -54,10 +52,12 @@ public class StudentsFragment extends Fragment{
 		sharedPref= getActivity().getApplicationContext().getSharedPreferences(getActivity().getString(R.string.preference_registration), Context.MODE_PRIVATE);
 		schoolName=sharedPref.getString("schoolId","");
 		className=sharedPref.getString("classId", "");
+		((TextView)currentView.findViewById(R.id.textView1)).setText("Class: "+className);
+		
 		ArrayList<HashMap<String, String>> userList =  controller.getAllUsers();
 		if(userList.size()!=0){
 			//Set the User Array list in ListView
-			ListAdapter adapter = new SimpleAdapter( getActivity(),userList, R.layout.view_user_entry, new String[] { "rollNo","studentName"}, new int[] {R.id.rollNo, R.id.studentName});
+			ListAdapter adapter = new SimpleAdapter( getActivity(),userList, R.layout.view_user_entry, new String[] { "rollNumber","studentName"}, new int[] {R.id.rollNo, R.id.studentName});
 			myList = (ListView)currentView.findViewById(android.R.id.list);
 			myList.setAdapter(adapter);
 			myList.setOnItemClickListener(new OnItemClickListener() {
@@ -92,19 +92,18 @@ public class StudentsFragment extends Fragment{
 		return currentView;
 		
 	}
-	//Add User method getting called on clicking (+) button
-		public void addUser(View view) {
-			Intent objIntent = new Intent(currentView.getContext(), NewUser.class);
-			startActivity(objIntent);
-		}
+	
 		
 	public void syncStudents(View v){
 		ArrayList<HashMap<String, String>> studentsList = controller.composeNonUpdateStudentList();
-		new EndpointsTask(studentsList, schoolName, className).execute(getActivity().getApplicationContext());
+		if(studentsList==null || studentsList.size()==0){
+			return;
+		}
+		//new EndpointsTask(studentsList, schoolName, className).execute(getActivity().getApplicationContext());
 		syncButton.setEnabled(false);
 		syncButton.setTextColor(Color.GREEN);
 	}
-	
+	/*
 	public class EndpointsTask extends AsyncTask<Context, Integer, String>{
 		private ArrayList<HashMap<String, String>> students;
 		private String school;
@@ -166,5 +165,7 @@ public class StudentsFragment extends Fragment{
 		   pDialog.dismiss();
 
 		}
+		
 	}
+	*/
 }

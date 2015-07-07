@@ -7,45 +7,55 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#FFFFFF" >
+    
+    <ImageView 
+        android:id="@+id/logoDisplay"
+        android:src="@drawable/logo_draft"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        
+        />
 
     <TextView
         android:id="@+id/teacherAid"
         style="@style/codeFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_below="@+id/logoDisplay"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
         android:text="@string/homeScreenTitle"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"/>
     <TextView
         android:id="@+id/schoolDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/teacherAid"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         style="@style/codeFontSmall"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="25sp" />
 	<TextView
         android:id="@+id/classDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/teacherAid"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:paddingTop="30dp"
-        style="@style/codeFontSmall"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="40dp"
+        android:paddingTop="10dp"
+         android:textSize="25sp"/>
 	<TextView 
 	    android:id = "@+id/dateTimeView"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/classDesc"
 	    android:layout_centerHorizontal="true"
-	    android:layout_marginTop="90dp"
-	    style="@style/codeFontSmall"/>
+	    android:layout_marginTop="60dp"
+	    android:textSize="25sp"/>
     <TextView 
 	    android:id = "@+id/numberStudents"
 	    android:layout_width="wrap_content"
@@ -53,5 +63,8 @@
 	    android:layout_below="@id/dateTimeView"
 	    android:layout_centerHorizontal="true"
 	    android:paddingTop="20dp"
+	    android:textSize="25sp"
 	    style="@style/codeFontSmall"/>
+
+   
 </RelativeLayout>

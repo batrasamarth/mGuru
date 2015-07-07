@@ -1,6 +1,7 @@
 package com.eduattendanceapp;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -27,8 +29,7 @@ public class HomeActivity extends FragmentActivity{
 	public ArrayList<Integer> attendancePresentList;
 	public ArrayList<Integer> totalAttendanceList;
 	private Fragment[] fragments = new Fragment[4];
-	public String date="";
-	
+	private Date dateFromAttendancePicker;
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_screen);
@@ -95,13 +96,20 @@ public class HomeActivity extends FragmentActivity{
 			
 		}
 	};
+	
+	public void setDateFromAttendancePicker(Date dateParam){
+		Log.d("SelectedDate@homeactivity", dateParam.toString());
+		dateFromAttendancePicker = dateParam;
+		QueryFragment fragment = (QueryFragment)getSupportFragmentManager().findFragmentById(R.id.QueryFragment);
+		fragment.displayAttendanceFromCalendar(dateParam);
+	}
+	
+	public Date getDateFromAttendancePicker(){
+		Log.d("returningDate@HomeActivity", dateFromAttendancePicker.toString());
+		return dateFromAttendancePicker;
+	}
+	
 	//Direct the method addUser as mentioned in students fragment
-	public void addUser(View v){
-		((StudentsFragment) fragments[STUDENTS]).addUser(v);
-	}
-	public void syncAttendance(View v){
-		((AttendanceFragment)fragments[ATTENDANCE]).syncAttendance(v);
-	}
 	public void syncStudents(View v){
 		((StudentsFragment) fragments[STUDENTS]).syncStudents(v);
 	}
@@ -111,16 +119,24 @@ public class HomeActivity extends FragmentActivity{
 	public void submitAttendance(View v){
 		((AttendanceFragment) fragments[ATTENDANCE]).submitAttendance(v);
 	}
-	public void displayAttendance(View v){
-		((QueryFragment) fragments[QUERY]).displayAttendance(v);
-	}
 	public void selectDateForAttendance(View v){
 		((QueryFragment) fragments[QUERY]).selectDateForAttendance(v);
 	}
 	
-	public void selectTypeForAttendance(View v){
-		((QueryFragment) fragments[QUERY]).selectTypeForAttendance(v);
+	public void selectPreviousDate(View v){
+		((QueryFragment) fragments[QUERY]).selectPreviousDate(v);
 	}
+	
+	
+	public void selectNextDate(View v){
+		((QueryFragment) fragments[QUERY]).selectNextDate(v);
+	}
+	
+	
+	public void markAllPresent(View v){
+		((AttendanceFragment)fragments[ATTENDANCE]).markAllPresent(v);
+	}
+	
 	public void declareHoliday(View v){
 		((AttendanceFragment)fragments[ATTENDANCE]).declareHoliday(v);
 	}
